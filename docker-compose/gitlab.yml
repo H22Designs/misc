@@ -1,0 +1,21 @@
+---
+version: "3.6"
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    hostname: gitlab.h22designs.com
+    ports:
+      - "222:22"
+      - "6800:80  "
+      - "6443:443"
+    volumes:
+      - "/home/bryan/selfhosted/docker/gitlab/data:/var/opt/gitlab"
+      - "/home/bryan/selfhosted/docker/gitlab/logs:/var/log/gitlab"
+      - "/home/bryan/selfhosted/docker/gitlab/config:/etc/gitlab"
+    restart: unless-stopped
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    volumes:
+      - "/home/bryan/selfhosted/docker/gitlab/config-runner:/etc/gitlab-runner"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: unless-stopped
