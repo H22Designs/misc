@@ -1,33 +1,14 @@
-version: '2'
+#  Install Nextcloud AIO in docker
+#  Nextcloud will start on port 8800
 
-volumes:
-  nextcloud:
-  db:
 
-services:
-  db:
-    image: mariadb:10.6
-    restart: always
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
-    volumes:
-      - db:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=ik9dfcb6
-      - MYSQL_PASSWORD=ik9dfcb6
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-
-  app:
-    image: nextcloud
-    restart: always
-    ports:
-      - 8800:80
-    links:
-      - db
-    volumes:
-      - nextcloud:/var/www/html/nextcloud
-    environment:
-      - MYSQL_PASSWORD=ik9dfcb6
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
+sudo docker run \
+--sig-proxy=false \
+--name nextcloud-aio-mastercontainer \
+--restart always \
+--publish 90:80 \
+--publish 8800:8080 \
+--publish 8443:8443 \
+--volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config \
+--volume /var/run/docker.sock:/var/run/docker.sock:ro \
+nextcloud/all-in-one:latest
