@@ -1,3 +1,4 @@
+#!/bin/bash
 #  Install Nextcloud AIO in docker
 #  Nextcloud will start on port 8800
 
