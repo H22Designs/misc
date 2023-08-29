@@ -26,9 +26,9 @@ services:
     ports:
       - "3300:3000"
       - "222:22"
-+    depends_on:
-+      - db
-+
+    depends_on:
+      - db
+
 #+  db:
 #+    image: mysql:8
 #+    restart: always
@@ -37,7 +37,7 @@ services:
 #+      - MYSQL_USER=gitea
 #+      - MYSQL_PASSWORD=gitea
 #+      - MYSQL_DATABASE=gitea
-+    networks:
-+      - gitea
-+    volumes:
-+      - ./mysql:/var/lib/mysql
+    networks:
+      - gitea
+    volumes:
+      - ./mysql:/var/lib/mysql
