@@ -1,5 +1,5 @@
 #!/bin/bash
-apt install fish btop nala -y
+apt install fish btop nala net-tools dnsutils -y
 
 fish
 
